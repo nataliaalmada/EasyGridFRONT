@@ -1,3 +1,5 @@
+// File: dcc-ufrr-main/pages/noticias/all.jsx
+
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -89,3 +91,6 @@ export default function AllNoticias() {
     </Flex>
   );
 }
+
+// Removed getServerSideProps function for testing purposes.
+

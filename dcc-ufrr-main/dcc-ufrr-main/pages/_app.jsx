@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { AuthProvider } from "../contexts/AuthContext";
+// Remover importações de autenticação para teste direto
 import { UserProvider } from "../contexts/UserContext";
 import { PageInstProvider } from "../contexts/PageInstContext";
 import { NoticiasProvider } from "../contexts/NoticiasContext";
@@ -15,51 +15,35 @@ import LayoutAdmin from "../components/layoutadmin";
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
   if (router.pathname.startsWith("/admin")) {
     return (
-      <AuthProvider>
-        <UserProvider>
-          <PageInstProvider>
-            <NoticiasProvider>
-              <ChakraProvider theme={theme}>
-                <LayoutAdmin>
-                  <Component {...pageProps} />
-                </LayoutAdmin>
-              </ChakraProvider>
-            </NoticiasProvider>
-          </PageInstProvider>
-        </UserProvider>
-      </AuthProvider>
-    );
-  }
-  if (router.pathname.startsWith("/auth")) {
-    return (
-      <AuthProvider>
-        <UserProvider>
-          <PageInstProvider>
-            <NoticiasProvider>
-              <ChakraProvider theme={theme}>
-                <Component {...pageProps} />
-              </ChakraProvider>
-            </NoticiasProvider>
-          </PageInstProvider>
-        </UserProvider>
-      </AuthProvider>
-    );
-  }
-  return (
-    <AuthProvider>
       <UserProvider>
         <PageInstProvider>
           <NoticiasProvider>
             <ChakraProvider theme={theme}>
-              <Layout>
+              <LayoutAdmin>
                 <Component {...pageProps} />
-              </Layout>
+              </LayoutAdmin>
             </ChakraProvider>
           </NoticiasProvider>
         </PageInstProvider>
       </UserProvider>
-    </AuthProvider>
+    );
+  }
+
+  return (
+    <UserProvider>
+      <PageInstProvider>
+        <NoticiasProvider>
+          <ChakraProvider theme={theme}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ChakraProvider>
+        </NoticiasProvider>
+      </PageInstProvider>
+    </UserProvider>
   );
 }
+
