@@ -1,91 +1,43 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { getCookie, setCookie, deleteCookie } from "cookies-next";
-import { useRouter } from "next/router";
-import { decode } from "jsonwebtoken";
 
-import api from "../utils/api";
-
+// Cria um contexto de autenticação
 const AuthContext = createContext({});
 
+// Provedor de Autenticação
 export const AuthProvider = ({ children }) => {
-  const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState();
+  const [user, setUser] = useState(null);  // Estado para armazenar o usuário
+  const [loading, setLoading] = useState(false);  // Estado de carregamento
 
-  async function loadUserFromCookies() {
-    try {
-      const token = getCookie(process.env.NEXT_PUBLIC_COOKIE_NAME);
-      if (token) {
-        console.log("Got a token in the cookies, let's see if it is valid");
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-        const { data } = await api.post("/public/validate");
-        if (data.isvalid) {
-          const { user } = decode(token);
-          if (user) setUser(user);
-          console.log("loadUserFromCookies:", user);
-        }
-      }
-      setLoading(false);
-    } catch (error) {
-      logout();
-      console.log(error);
-    }
-  }
-  useEffect(() => {
-    loadUserFromCookies();
-  }, []);
+  // Função para simular o login
+  const login = (email, password) => {
+    // Mock de um usuário admin
+    const mockAdminUser = {
+      id: 1,
+      name: "Temporary Admin",
+      email: "admin@temporary.com",
+      role: "admin", // Definindo o papel como 'admin'
+    };
 
-  const login = async (email, password) => {
-    const response = await api.post("/public/login", { email, password });
-    const { data } = response;
-    console.log(response);
-    if (data.token) {
-      console.log("Got token");
-      setCookie(process.env.NEXT_PUBLIC_COOKIE_NAME, data.token);
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
-      const { data: dataValid } = await api.post("/public/validate");
-      if (dataValid.isvalid) {
-        setUser(data.user);
-        return response;
-      }
-    }
-    return response;
+    setUser(mockAdminUser);  // Definindo o mock como usuário atual
+    console.log("Usuário logado:", mockAdminUser);
   };
 
+  // Função para simular o logout
   const logout = () => {
-    deleteCookie(process.env.NEXT_PUBLIC_COOKIE_NAME);
-    setUser(null);
-    delete api.defaults.headers.Authorization;
-    router.push("/auth/login");
+    setUser(null);  // Limpa o estado do usuário
+    console.log("Usuário deslogado");
   };
 
-  const userRegister = async (name, email, password) => {
-    try {
-      const response = await api.post("/public/register", {
-        name,
-        email,
-        password,
-      });
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // UseEffect vazio que normalmente carregaria o usuário de cookies (não necessário para o mock)
+  useEffect(() => {}, []);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
-        setUser,
-        login,
-        loading,
-        logout,
-        userRegister,
-        message,
-        setMessage,
-        loadUserFromCookies,
+        user,  // O usuário logado
+        login,  // Função de login
+        logout,  // Função de logout
+        loading,  // Estado de carregamento
       }}
     >
       {children}
@@ -93,4 +45,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// Hook personalizado para usar o contexto de autenticação
 export const useAuth = () => useContext(AuthContext);
+
