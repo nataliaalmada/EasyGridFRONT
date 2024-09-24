@@ -1,33 +1,30 @@
 # EasyGrid _FrontEnd
+Front end do Projeto EasyGrid, para disciplina DCC802-PROJETO E IMPLEMENTAÇÃO DE SISTEMAS, Orientada pelo Professor Dr. MARCELO HENRIQUE OLIVEIRA HENKLAIN
 
-Projeto JS/TS para sorting de horários de aulas em intervalos dinâmicos baseados em restrições mutuas.
+[X] Mostra Aba de Professores
+[X] Mostra Aba de Horários
+[] Rotas conectadas e funcionais com o backend
+[] autenticação de login reativada
 
 ## Tipos de usuários
 
 - Professor: Privilégios de visualização do schedule e sugestões de horários disponíveis(WIP).
 - Coordenador: Privilégios totais de administração da plataforma, criação de usuários, criação de semestres, disciplinas e horários.
 
-## Features
+## Feito a partir do design desenvolvido pelo Professor Acauan Ribeiro  junto ao Departamento de Ciência da Computação da UFRR,para a tentativa de padronizar o layout de aplicações para o DCC.
 
-- Registro de usuários terceiros por parte de usuários coordenadores.
-- Registro de semestres.
-- Registro de disciplinas atribuídas à semestres.
-- Registro de horários semanais baseados nas restrições.(WIP)
+E-mail: [email](mailto:acauan.ribeiro@ufrr.br)
+Linkedin: [@acauanribeiro](https://www.linkedin.com/in/acauanribeiro)
 
-## Restrição de criação de horários de disciplinas
+### Built With
 
-- materias de mesmos semestres não podem chocar horário(WIP)
-- materias de um mesmo professor não podem chocar horário(WIP)
-- materias só podem ser atribuidas em horários até 16H(WIP)
-- matérias só devem ser atribuídas no máximo até 06 horários diferentes(WIP)
-- materias só podem ser atribuídas no mínino à 04 horários diferentes(WIP)
-- materias devem ser atribuidas em 2 horários seguidos, ex: 24M12(WIP)
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Node][Node.js]][Node-url]
 
 ## Instalação e configuração
-
-### for production
-
-[WIP]
 
 ### for development
 
