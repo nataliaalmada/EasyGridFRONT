@@ -1,9 +1,9 @@
 # EasyGrid _FrontEnd
 Front end do Projeto EasyGrid, para disciplina DCC802-PROJETO E IMPLEMENTAÇÃO DE SISTEMAS, Orientada pelo Professor Dr. MARCELO HENRIQUE OLIVEIRA HENKLAIN
 
-[X] Mostra Aba de Professores
-[X] Mostra Aba de Horários
-[] Rotas conectadas e funcionais com o backend
+[x] Mostra Aba de Professores
+[x] Mostra Aba de Horários
+[x]Rotas conectadas e funcionais com o backend
 [] autenticação de login reativada
 
 ## Tipos de usuários
@@ -23,6 +23,17 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![Node][Node.js]][Node-url]
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin-url]: www.linkedin.com/in/acauanribeiro
+[product-screenshot]: frontend/public/images/screen-shot-dcc.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Node.js]: https://img.shields.io/badge/node.js-026e00?style=for-the-badge&logo=nodedotjs&logoColor=white
+[Node-url]: https://nodejs.org/pt-br/
 
 ## Instalação e configuração
 
