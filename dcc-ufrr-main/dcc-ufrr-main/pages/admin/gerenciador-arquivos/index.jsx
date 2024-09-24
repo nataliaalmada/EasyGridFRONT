@@ -1,4 +1,5 @@
-// https://codesandbox.io/s/github/anuraghazra/react-folder-tree?file=/src/App.js:1615-1686
+// File: dcc-ufrr-main/pages/admin/gerenciador-arquivos.jsx
+
 import { useRouter } from "next/router";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
@@ -48,13 +49,12 @@ const dataJson = [
 
 export default function GerenciarDeArquivos() {
   const router = useRouter();
-
-  // eslint-disable-next-line no-unused-vars
   let [data, setData] = useState(dataJson);
 
   const handleClick = (node) => {
     console.log(node);
   };
+
   const handleUpdate = (state) => {
     localStorage.setItem(
       "tree",
@@ -89,3 +89,6 @@ export default function GerenciarDeArquivos() {
     </VStack>
   );
 }
+
+// Remove the getServerSideProps function
+

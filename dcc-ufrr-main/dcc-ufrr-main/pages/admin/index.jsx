@@ -1,4 +1,4 @@
-import { Box, HStack, Image, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Image, Link, Text, VStack } from "@chakra-ui/react";
 import { getCookie } from "cookies-next";
 import { FiExternalLink } from "react-icons/fi";
 import AdminStatistics from "../../components/sections/AdminStatistics";
@@ -7,19 +7,17 @@ import CardDashboard from "../../components/_ui/CardDashboard";
 import { useUser } from "../../contexts/UserContext";
 import { usePageInstCtx } from "../../contexts/PageInstContext";
 import { useNoticiasCtx } from "../../contexts/NoticiasContext";
-import NextLink from "next/link";
-
+import NextLink from "next/link"; // import NextLink
 import api from "../../utils/api";
 import { useEffect } from "react";
 
-export default function AdminIndex() {
+function AdminIndex() {
   const { pagesSize } = usePageInstCtx();
   const { noticiasSize } = useNoticiasCtx();
-  const { usersSize, getAllUsers, getSizeUsers } = useUser();
+  const { usersSize, getAllUsers } = useUser(); // Updated destructuring
 
   useEffect(() => {
     getAllUsers();
-    getSizeUsers();
   }, []);
 
   // Force reload page (uma vez)
@@ -95,41 +93,21 @@ export default function AdminIndex() {
             </HStack>
           </VStack>
         </CardDashboard>
-        <CardDashboard
-          title="Links Úteis para os Professores"
-          bgHead="gray.100"
-          bgBody="white"
-          color="black"
-        >
-          <VStack w="full" alignItems="flex-start">
-            <HStack>
-              <VStack spacing={0} alignItems="flex-start">
-                <NextLink
-                  href="https://ufrr-my.sharepoint.com/:f:/g/personal/chefia_dcc_ufrr_br/EqFGji3MCf9BhCt7qaERzzsBfm6rA7hLAlAmzFxhJZCmlw?e=NIv7oO"
-                  passHref
-                >
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    _hover={{ opacity: "85%" }}
-                    isExternal
-                  >
-                    <HStack>
-                      <Text fontWeight="bold" fontSize="sm" color="brand.500">
-                        Sharepoint - Gestão DCC
-                      </Text>
-                      <FiExternalLink color="brand.500" />
-                    </HStack>
-                  </Link>
-                </NextLink>
 
-                <Text color="gray.500" fontSize="xs">
-                  Documentos, memorandos e atas do departamento.
-                </Text>
-              </VStack>
-            </HStack>
-          </VStack>
-        </CardDashboard>
+        {/* New buttons for managing users, assigning subjects, and schedules */}
+        <NextLink href="/admin/users/manage-teachers" passHref>
+          <Button colorScheme="teal" w="full">
+            Gerenciar Professores
+          </Button>
+        </NextLink>
+
+        <NextLink href="/admin/schedule" passHref>
+          <Button colorScheme="blue" w="full">
+            Gerenciar Horários
+          </Button>
+        </NextLink>
       </VStack>
+
       <VStack w={{ base: "full", md: "60%" }}>
         <CardDashboard
           title="Estatísticas"
@@ -147,7 +125,6 @@ export default function AdminIndex() {
               noticiasSize={noticiasSize}
               usersSize={usersSize}
             />
-
             <LineChar />
           </VStack>
         </CardDashboard>
@@ -156,30 +133,5 @@ export default function AdminIndex() {
   );
 }
 
-export async function getServerSideProps({ req, res }) {
-  const defaultReturnObject = {
-    redirect: {
-      destination: "/auth/login",
-      permanent: false,
-    },
-  };
+export default AdminIndex;
 
-  try {
-    const token = getCookie(process.env.NEXT_PUBLIC_COOKIE_NAME, { req, res });
-    if (!token) {
-      return defaultReturnObject;
-    }
-
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-    const { data } = await api.post("/public/validate");
-    if (!data.isvalid) {
-      return defaultReturnObject;
-    }
-    return {
-      props: {},
-    };
-  } catch (error) {
-    console.log("Index Admin, getServerSideProps, Something Went Wrong", error);
-    return defaultReturnObject;
-  }
-}
