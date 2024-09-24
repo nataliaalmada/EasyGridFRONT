@@ -1,10 +1,10 @@
 # EasyGrid _FrontEnd
 Front end do Projeto EasyGrid, para disciplina DCC802-PROJETO E IMPLEMENTAÇÃO DE SISTEMAS, Orientada pelo Professor Dr. MARCELO HENRIQUE OLIVEIRA HENKLAIN
 
-[x] Mostra Aba de Professores
-[x] Mostra Aba de Horários
-[x]Rotas conectadas e funcionais com o backend
-[] autenticação de login reativada
+- [X] Mostra Aba de Professores;
+- [X] Mostra Aba de Horários;
+- [ ] Rotas conectadas e funcionais com o backend;
+- [ ] autenticação de login reativada.
 
 ## Tipos de usuários
 
